@@ -47,7 +47,7 @@ def do_query(params):
     return res
 
 
-@app.route("/perform_query")
+@app.route("/perform_query", methods=["POST"])
 def perform_query():
     # получить параметры query и file_name из request.args, при ошибке вернуть ошибку 400
     # проверить, что файла file_name существует в папке DATA_DIR, при ошибке вернуть ошибку 400
@@ -55,7 +55,7 @@ def perform_query():
     # вернуть пользователю сформированный результат
     data = request.json
     file_name = data['filename']
-    if os.path.exists(os.path.join(DATA_DIR, file_name)):
+    if not os.path.exists(os.path.join(DATA_DIR, file_name)):
         raise BadRequest
 
     return jsonify(do_query(data))

@@ -54,7 +54,7 @@ def perform_query():
     # с помощью функционального программирования (функций filter, map), итераторов/генераторов сконструировать запрос
     # вернуть пользователю сформированный результат
     data = request.json
-    file_name = data['filename']
+    file_name = data['file_name']
     if not os.path.exists(os.path.join(DATA_DIR, file_name)):
         raise BadRequest
 
